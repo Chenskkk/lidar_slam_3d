@@ -25,8 +25,8 @@ MapBuilder::MapBuilder() :
     ndt_.setMaximumIterations(30);
 
     SlamBlockSolver::LinearSolverType* linear_solver = new SlamLinearSolver;
-    SlamBlockSolver* solver_ptr = new SlamBlockSolver(linear_solver);
-    g2o::OptimizationAlgorithmLevenberg* solver = new g2o::OptimizationAlgorithmLevenberg(solver_ptr); // L-M
+    SlamBlockSolver* solver_ptr = new SlamBlockSolver(unique_ptr<SlamBlockSolver::LinearSolverType> (linear_solver));  //强制类型转换，将普通指针转换为智能指针
+    g2o::OptimizationAlgorithmLevenberg* solver = new g2o::OptimizationAlgorithmLevenberg(unique_ptr<SlamBlockSolver>(solver_ptr)); // L-M
     optimizer_.setAlgorithm(solver);
     optimizer_.setVerbose(false);
 }
