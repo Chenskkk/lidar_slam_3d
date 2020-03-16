@@ -12,7 +12,7 @@ namespace lidar_slam_3d
 class KeyFrame
 {
 public:
-    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW  //Eigen 内存（指针）对齐
     typedef std::shared_ptr<KeyFrame> Ptr;
     KeyFrame() {}
     KeyFrame(int id, const Eigen::Matrix4f& pose, const pcl::PointCloud<pcl::PointXYZI>::Ptr& cloud)
